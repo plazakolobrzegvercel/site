@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import 'tailwindcss';
+
+@theme {
+	--font-display: 'Playfair Display', sans-serif;
+	--font-body: 'Inter', sans-serif;
+	/* Primary - Sandy Yellow Background */
+	--color-background: hsl(50 85% 91%);
+	--color-foreground: hsl(200 25% 20%);
+
+	/* Cards - Slightly lighter cream */
+	--color-card: hsl(48 80% 95%);
+	--color-card-foreground: hsl(200 25% 20%);
+
+	--color-popover: hsl(48 80% 95%);
+	--color-popover-foreground: hsl(200 25% 20%);
+
+	/* Primary - Teal/Sea Color */
+	--color-primary: hsl(187 100% 27%);
+	--color-primary-foreground: hsl(0 0% 100%);
+
+	/* Secondary - Warm sand */
+	--color-secondary: hsl(42 50% 85%);
+	--color-secondary-foreground: hsl(200 25% 20%);
+
+	/* Muted - Soft beige */
+	--color-muted: hsl(45 40% 88%);
+	--color-muted-foreground: hsl(200 15% 45%);
+
+	/* Accent - Coral/Sunset */
+	--color-accent: hsl(20 80% 60%);
+	--color-accent-foreground: hsl(0 0% 100%);
+
+	--color-destructive: hsl(0 84.2% 60.2%);
+	--color-destructive-foreground: hsl(210 40% 98%);
+
+	--color-border: hsl(42 30% 80%);
+	--color-input: hsl(42 30% 80%);
+	--color-ring: hsl(187 100% 27%);
+
+	--radius: 0.75rem;
+
+	/* Custom tokens */
+	--color-sea: hsl(187 70% 42%);
+	--color-sea-light: hsl(180 60% 55%);
+	--color-sea-dark: hsl(187 80% 32%);
+	--color-sand: hsl(50 85% 91%);
+	--color-sand-dark: hsl(42 50% 75%);
+	--color-cream: hsl(48 80% 95%);
+	--color-sunset: hsl(20 80% 60%);
+	--color-wave: hsl(180 55% 60%);
+
+	/* Shadows */
+	--shadow-soft: 0 4px 20px -4px hsl(200 25% 20% / 0.1);
+	--shadow-medium: 0 8px 30px -6px hsl(200 25% 20% / 0.15);
+	--shadow-glow: 0 0 40px -10px hsl(187 100% 27% / 0.3);
+
+	/* Sidebar defaults */
+	--color-sidebar-background: hsl(0, 0%, 98%);
+	--color-sidebar-foreground: hsl(240 5.3% 26.1%);
+	--color-sidebar-primary: hsl(240 5.9% 10%);
+	--color-sidebar-primary-foreground: hsl(0 0% 98%);
+	--color-sidebar-accent: hsl(240 4.8% 95.9%);
+	--color-sidebar-accent-foreground: hsl(240 5.9% 10%);
+	--color-sidebar-border: hsl(220 13% 91%);
+	--color-sidebar-ring: hsl(217.2 91.2% 59.8%);
+}
+
+#root {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 2rem;
+	text-align: center;
+}
+
+.logo {
+	height: 6em;
+	padding: 1.5em;
+	will-change: filter;
+	transition: filter 300ms;
+}
+.logo:hover {
+	filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+	filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	a:nth-of-type(2) .logo {
+		animation: logo-spin infinite 20s linear;
+	}
+}
+
+.card {
+	padding: 2em;
+}
+
+.read-the-docs {
+	color: #888;
+}
+
+@layer base {
+	* {
+		@apply border-border;
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		@apply bg-background font-body font-light text-foreground antialiased;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		@apply font-display;
+	}
+}
+
+.font-display {
+	font-family: var(--font-display);
+}
+
+.font-body {
+	font-family: var(--font-body);
+}
+
+.text-gradient-sea {
+	@apply bg-linear-to-r from-primary to-[hsl(var(--wave))] bg-clip-text text-transparent;
+}
+
+.bg-gradient-sand {
+	@apply bg-linear-180 from-sand to-cream;
+}
+
+.bg-gradient-sea {
+	@apply bg-linear-150 from-sea to-sea-light;
+}
+
+.shadow-soft {
+	box-shadow: var(--shadow-soft);
+}
+
+.shadow-medium {
+	box-shadow: var(--shadow-medium);
+}
+
+.shadow-glow {
+	box-shadow: var(--shadow-glow);
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: hsl(var(--sand));
+}
+
+::-webkit-scrollbar-thumb {
+	background: hsl(var(--sea-light));
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: hsl(var(--sea));
+}
