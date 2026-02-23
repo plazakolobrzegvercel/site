@@ -119,9 +119,9 @@
 					transition:fly={{ x: 30, duration: 600, delay: 400 }}
 					class="rounded-2xl bg-card p-8 shadow-medium"
 				>
-					<h3 class="mb-4 font-display text-2xl font-semibold text-foreground">
+					<h2 class="mb-4 font-display text-2xl font-semibold text-foreground">
 						Szybka rezerwacja
-					</h3>
+					</h2>
 					<p class="mb-6 font-body text-muted-foreground">
 						Zadzwoń do nas lub napisz email - odpowiemy najszybciej jak to możliwe i pomożemy w
 						wyborze idealnego pokoju na Twój wypoczynek.
