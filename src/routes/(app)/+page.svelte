@@ -3,6 +3,7 @@
 	import Rooms from '$lib/ui/Rooms.svelte';
 	import Contact from '$lib/ui/Contact.svelte';
 	import About from '$lib/ui/About.svelte';
+	import Atmosphere from '$lib/ui/Atmosphere.svelte';
 </script>
 
 <svelte:head>
@@ -11,7 +12,8 @@
 
 <main class="min-h-screen">
 	<Hero />
-	<About />
 	<Rooms />
+	<About />
+	<Atmosphere />
 	<Contact />
 </main>

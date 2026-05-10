@@ -12,7 +12,7 @@
 		{ href: '#contact', label: 'Kontakt' }
 	];
 
-	let visible = $state(false);
+	let visible = false;
 
 	function inview(node: HTMLElement, onVisible: () => void) {
 		const observer = new IntersectionObserver(
@@ -46,7 +46,7 @@
 		class="relative z-10 container mx-auto max-w-350 px-6 pt-8"
 	>
 		{#if visible}
-			<div class="flex flex-col items-center justify-between gap-8 md:flex-row">
+			<div class=" flex flex-col items-center justify-between gap-8 md:flex-row">
 				<div transition:fly={{ y: 20, duration: 500 }} class="text-center md:text-left">
 					<img
 						src={logo}
@@ -54,7 +54,7 @@
 						class="mx-auto mb-4 h-16 w-auto opacity-90 brightness-0 invert md:mx-0"
 					/>
 					<p class="max-w-xs font-body text-sm text-primary-foreground/70">
-						Pokoje gościnne w Kołobrzegu, zaledwie 150m od plaży. Idealne miejsce na Twój wakacyjny
+						Pokoje gościnne w Kołobrzegu, zaledwie 100m od plaży. Idealne miejsce na Twój wakacyjny
 						wypoczynek.
 					</p>
 				</div>
@@ -62,6 +62,7 @@
 				<nav transition:fly={{ y: 20, duration: 500, delay: 100 }} class="flex gap-8">
 					{#each navLinks as link, i (i)}
 						<a
+							// eslint-disable-next-line svelte/no-navigation-without-resolve
 							href={link.href}
 							class="font-body text-sm text-primary-foreground/70 transition-colors hover:text-primary-foreground"
 						>

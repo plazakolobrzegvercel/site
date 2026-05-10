@@ -1,17 +1,14 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
-	import { Umbrella, Wifi, Car, Coffee, Waves, Heart } from '@lucide/svelte';
+	import { Umbrella, Car, Coffee, Waves } from '@lucide/svelte';
+	import buildingImage from '$lib/assets/building.avif';
+	import EnhancedImage from '$lib/components/EnhancedImage.svelte';
 
 	const features = [
 		{
 			icon: Umbrella,
-			title: '150m do plaży',
-			description: 'Zaledwie 2 minuty spaceru od piaszczystej plaży'
-		},
-		{
-			icon: Wifi,
-			title: 'Darmowe WiFi',
-			description: 'Szybki internet w każdym pokoju'
+			title: '100m do plaży',
+			description: 'Zaledwie 2 minuty spaceru od piaszczystej plaży w dzielnicy uzdrowiskowej'
 		},
 		{
 			icon: Car,
@@ -27,24 +24,20 @@
 			icon: Waves,
 			title: 'Sprzęt plażowy',
 			description: 'Leżaki, parawan i ręczniki w zestawie'
-		},
-		{
-			icon: Heart,
-			title: 'Domowa atmosfera',
-			description: 'Przytulne pokoje z indywidualnym podejściem'
 		}
 	];
 
 	const stats = [
-		{ value: '150m', label: 'do plaży' },
+		{ value: '100m', label: 'do plaży' },
 		{ value: '4', label: 'pokoje' },
 		{ value: '8+', label: 'lat doświadczenia' },
 		{ value: '100%', label: 'zadowolonych gości' }
 	];
 
-	let headerVisible = $state(false);
-	let featuresVisible = $state(false);
-	let statsVisible = $state(false);
+	let headerVisible = false;
+	let photoVisible = false;
+	let featuresVisible = false;
+	let statsVisible = false;
 
 	function inview(node: HTMLElement, onVisible: () => void) {
 		const observer = new IntersectionObserver(
@@ -70,63 +63,78 @@
 <section id="about" class="relative overflow-hidden bg-linear-180 from-sand to-cream py-24">
 	<div
 		class="absolute top-0 right-0 left-0 h-24 bg-background"
-		style="
-			clipPath: ellipse(70% 100% at 50% 0%);
-		"
+		style="clip-path: ellipse(70% 100% at 50% 0%);"
 	></div>
 
 	<div class="relative z-10 container mx-auto max-w-350 px-6">
-		<div use:inview={() => (headerVisible = true)} class="mx-auto mb-16 max-w-3xl text-center">
-			{#if headerVisible}
-				<div transition:fly={{ y: 30, duration: 600 }}>
-					<span
-						class="mb-4 inline-block text-sm font-medium tracking-widest text-primary uppercase"
-					>
-						O nas
-					</span>
-					<h2 class="mb-6 font-display text-4xl font-semibold text-foreground md:text-5xl">
-						Wypoczynek blisko morza
-					</h2>
-					<p class="font-body text-lg leading-relaxed text-muted-foreground">
-						Oferujemy komfortowe pokoje gościnne w samym sercu Kołobrzegu. Nasz obiekt to idealne
-						miejsce dla osób szukających spokoju, bliskości morza i domowej atmosfery. Zapraszamy do
-						nas rodziny, pary oraz podróżników ceniących przytulne, dobrze wyposażone wnętrza.
-					</p>
-				</div>
-			{/if}
-		</div>
-
-		<div
-			use:inview={() => (featuresVisible = true)}
-			class="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-		>
-			{#each features as feature, index}
-				{#if featuresVisible}
-					<div
-						transition:fly={{ y: 30, duration: 500, delay: index * 150 }}
-						class="group rounded-2xl bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-medium"
-					>
-						<div
-							class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-linear-150 from-sea to-sea-light transition-transform duration-300 group-hover:scale-110"
+		<!-- Two-column layout -->
+		<div class="mb-20 grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+			<!-- Left column: text + features -->
+			<div use:inview={() => (headerVisible = true)}>
+				{#if headerVisible}
+					<div transition:fly={{ x: -30, duration: 600 }}>
+						<span
+							class="mb-4 inline-block text-sm font-medium tracking-widest text-primary uppercase"
 						>
-							<feature.icon class="h-6 w-6 text-primary-foreground" />
-						</div>
-						<h3 class="mb-2 font-display text-xl font-bold text-foreground">
-							{feature.title}
-						</h3>
-						<p class="font-body text-muted-foreground">
-							{feature.description}
+							O nas
+						</span>
+						<h2 class="mb-6 font-display text-4xl font-semibold text-foreground md:text-5xl">
+							Wypoczynek blisko morza
+						</h2>
+						<p class="mb-10 font-body text-lg leading-relaxed text-muted-foreground">
+							Oferujemy apartamencik i 3 niezależne pokoje gościnne na ul. Kopernika w dzielnicy
+							uzdrowiskowej Kołobrzegu, nieopodal najdłuższej w Polsce alei nadmorskiej – „Promenady
+							Morskich Szeptów". Każdy pokój ma osobne wejście, więc możesz czuć się swobodnie i
+							wracać kiedy zechcesz.
 						</p>
+
+						<!-- Features Grid -->
+						<div use:inview={() => (featuresVisible = true)} class="grid gap-4 sm:grid-cols-2">
+							{#each features as feature, index (index)}
+								{#if featuresVisible}
+									<div
+										transition:fly={{ y: 20, duration: 500, delay: 200 + index * 100 }}
+										class="group rounded-2xl bg-card p-5 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-medium"
+									>
+										<div
+											class="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-linear-150 from-sea to-sea-light transition-transform duration-300 group-hover:scale-110"
+										>
+											<feature.icon class="h-5 w-5 text-primary-foreground" />
+										</div>
+										<h3 class="mb-1 font-display text-lg font-semibold text-foreground">
+											{feature.title}
+										</h3>
+										<p class="font-body text-sm text-muted-foreground">
+											{feature.description}
+										</p>
+									</div>
+								{/if}
+							{/each}
+						</div>
 					</div>
 				{/if}
-			{/each}
+			</div>
+
+			<!-- Right column: photo -->
+			<div use:inview={() => (photoVisible = true)}>
+				{#if photoVisible}
+					<div
+						transition:fly={{ x: 30, duration: 700, delay: 200 }}
+						class="overflow-hidden rounded-2xl shadow-medium"
+					>
+						<EnhancedImage
+							src={buildingImage}
+							alt="Nasz obiekt - ul. Kopernika 7, Kołobrzeg"
+							className="aspect-4/5 h-full w-full object-cover"
+						/>
+					</div>
+				{/if}
+			</div>
 		</div>
 
-		<div
-			use:inview={() => (statsVisible = true)}
-			class="mt-20 grid grid-cols-2 gap-8 md:grid-cols-4"
-		>
-			{#each stats as stat, index}
+		<!-- Stats -->
+		<div use:inview={() => (statsVisible = true)} class="grid grid-cols-2 gap-8 md:grid-cols-4">
+			{#each stats as stat, index (index)}
 				{#if statsVisible}
 					<div
 						transition:fly={{ y: 30, duration: 600, delay: 600 + index * 100 }}

@@ -1,4 +1,3 @@
-# Blokowanie botów AI i Scraperów
 /* /blocked.txt  403!  User-Agent: GPTBot
 /* /blocked.txt  403!  User-Agent: ChatGPT-User
 /* /blocked.txt  403!  User-Agent: ClaudeBot
@@ -6,7 +5,6 @@
 /* /blocked.txt  403!  User-Agent: CCBot
 /* /blocked.txt  403!  User-Agent: anthropic-ai
 
-# Blokowanie agresywnych crawlerów SEO / Marketingowych
 /* /blocked.txt  403!  User-Agent: AhrefsBot
 /* /blocked.txt  403!  User-Agent: SemrushBot
 /* /blocked.txt  403!  User-Agent: MJ12bot
@@ -15,7 +13,6 @@
 /* /blocked.txt  403!  User-Agent: Rogerbot
 /* /blocked.txt  403!  User-Agent: MegaIndex
 
-# Blokowanie zagranicznych wyszukiwarek (jeśli targetujesz Polskę/Zachód)
 /* /blocked.txt  403!  User-Agent: Baiduspider
 /* /blocked.txt  403!  User-Agent: YandexBot
 /* /blocked.txt  403!  User-Agent: PetalBot
