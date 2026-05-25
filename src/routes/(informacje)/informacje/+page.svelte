@@ -59,13 +59,7 @@
 	<header class="sticky top-0 z-50 bg-primary py-4 shadow-medium">
 		<div class="container mx-auto flex items-center justify-between gap-6 px-6">
 			<a href="/" class="flex items-center gap-3">
-				<EnhancedImage
-					src={logo}
-					alt="Plaza Blisko"
-					className="h-12 w-auto"
-					width={200}
-					height={60}
-				/>
+				<img src={logo} alt="Plaza Blisko" class="h-12 w-auto" width="200" height="60" />
 			</a>
 			<ul class="hidden items-center gap-8 md:flex">
 				<li>
@@ -249,7 +243,7 @@
 		</div>
 	</section>
 
-	<section id="regulamin" class="scroll-mt-10 bg-card py-20">
+	<section id="regulamin" class="bg-card py-20">
 		<div class="container mx-auto px-6">
 			<div class="mx-auto mb-12 max-w-3xl text-center" in:fade={{ duration: 600 }}>
 				<div class="mb-6 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2">

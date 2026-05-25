@@ -1,19 +1,11 @@
 <script lang="ts">
 	/* eslint-disable svelte/no-navigation-without-resolve */
 	import { fade, fly } from 'svelte/transition';
+	import { writable } from 'svelte/store';
 	import { MapPin, Phone, Mail, Clock, Send } from '@lucide/svelte';
-	import { z } from 'zod';
+	import emailjs from '@emailjs/browser';
 
-	const contactFormSchema = z.object({
-		name: z.string().trim().min(2, { message: 'Imię musi mieć co najmniej 2 znaki' }).max(100),
-		email: z.string().trim().email({ message: 'Nieprawidłowy adres e-mail' }).max(255),
-		phone: z.string().trim().max(30).optional().or(z.literal('')),
-		message: z
-			.string()
-			.trim()
-			.min(10, { message: 'Wiadomość musi mieć co najmniej 10 znaków' })
-			.max(1000)
-	});
+	emailjs.init('Yf4SNVhJSYCRpvnH7');
 
 	const contactInfo = [
 		{
@@ -43,51 +35,101 @@
 	];
 
 	let formData = { name: '', email: '', phone: '', message: '' };
+	let lastSent = 0;
+	let errors: { [key: string]: string } = {};
 	let isSubmitting = false;
-	let isInView = false;
-	let errorMessage = '';
-	let successMessage = '';
-	let contactSection: boolean | HTMLElement = false;
+	const toastMessage = writable<string | null>(null);
+	let contactSection: HTMLElement | null = null;
 
-	const handleSubmit = (e: Event) => {
+	const canSend = () => {
+		const now = Date.now();
+		if (now - lastSent < 10000) {
+			alert('Poczekaj chwilę przed ponownym wysłaniem.');
+			return false;
+		}
+		lastSent = now;
+		return true;
+	};
+
+	const validate = () => {
+		const newErrors: { [key: string]: string } = {};
+		if (!formData.name.trim()) {
+			newErrors.name = 'Imię i nazwisko są wymagane.';
+		}
+		if (!formData.email.trim()) {
+			newErrors.email = 'Email jest wymagany.';
+		} else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+			newErrors.email = 'Nieprawidłowy format email.';
+		}
+		if (!formData.message.trim()) {
+			newErrors.message = 'Wiadomość jest wymagana.';
+		}
+		return newErrors;
+	};
+
+	const showToast = (message: string) => {
+		toastMessage.set(message);
+		setTimeout(() => toastMessage.set(null), 5000);
+	};
+
+	const handleSubmit = async (e: Event) => {
 		e.preventDefault();
-		errorMessage = '';
-		successMessage = '';
+		if (!canSend()) return;
 
-		const result = contactFormSchema.safeParse(formData);
-		if (!result.success) {
-			errorMessage = result.error.issues[0].message;
+		errors = validate();
+		if (Object.keys(errors).length > 0) {
 			return;
 		}
 
 		isSubmitting = true;
-		const subject = encodeURIComponent(`Zapytanie od ${result.data.name}`);
-		const body = encodeURIComponent(
-			`Imię i nazwisko: ${result.data.name}\nE-mail: ${result.data.email}\nTelefon: ${result.data.phone || '-'}\n\nWiadomość:\n${result.data.message}`
-		);
-		window.location.href = `mailto:rezerwacje@plazablisko.pl?subject=${subject}&body=${body}`;
-
-		setTimeout(() => {
-			isSubmitting = false;
-			successMessage = 'Dziękujemy! Otworzyliśmy Twojego klienta poczty z gotową wiadomością.';
+		try {
+			await emailjs.send(
+				'service_bl5857h',
+				'template_icf1qgr',
+				{
+					title: 'Formularz kontaktowy ze strony',
+					name: formData.name,
+					email: formData.email,
+					phone: formData.phone,
+					message: formData.message
+				},
+				'TMUBH_SBSZY1QNwXK'
+			);
+			showToast('Wiadomość wysłana! Skontaktujemy się z Tobą wkrótce.');
 			formData = { name: '', email: '', phone: '', message: '' };
-		}, 500);
+			errors = {};
+		} catch {
+			showToast('Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie.');
+		} finally {
+			isSubmitting = false;
+		}
 	};
 
-	function checkInView() {
-		if (!contactSection) return;
-		const rect = contactSection.getBoundingClientRect();
-		isInView = rect.top < window.innerHeight - 100;
-	}
+	const handleInput = (field: keyof typeof formData, value: string) => {
+		formData = { ...formData, [field]: value };
+		if (errors[field]) {
+			const { [field]: removed, ...rest } = errors;
+			void removed;
+			errors = rest;
+		}
+	};
 </script>
-
-<svelte:window on:scroll={checkInView} />
 
 <section id="contact" class="bg-gradient-sand relative overflow-hidden py-24">
 	<div class="absolute top-0 right-0 h-96 w-96 rounded-full bg-primary/5 blur-3xl"></div>
 	<div class="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-sunset/5 blur-3xl"></div>
 
 	<div class="relative z-10 container mx-auto px-6" bind:this={contactSection}>
+		{#if $toastMessage}
+			<div class="fixed inset-x-0 bottom-6 z-50 flex justify-center px-4">
+				<div
+					class="rounded-full bg-foreground/95 px-6 py-3 text-sm text-background shadow-xl backdrop-blur-md transition duration-300"
+					transition:fade={{ duration: 200 }}
+				>
+					{$toastMessage}
+				</div>
+			</div>
+		{/if}
 		<div class="mx-auto mb-16 max-w-3xl text-center" transition:fade={{ duration: 600 }}>
 			<span class="mb-4 inline-block text-sm font-medium tracking-widest text-primary uppercase">
 				Kontakt
@@ -151,18 +193,6 @@
 				</p>
 
 				<form on:submit={handleSubmit} class="flex flex-1 flex-col space-y-4">
-					{#if errorMessage}
-						<div class="rounded-lg bg-red-50 p-3 text-sm text-red-600">
-							{errorMessage}
-						</div>
-					{/if}
-
-					{#if successMessage}
-						<div class="rounded-lg bg-green-50 p-3 text-sm text-green-600">
-							{successMessage}
-						</div>
-					{/if}
-
 					<div>
 						<label for="name" class="mb-1 block text-sm font-medium text-foreground">
 							Imię i nazwisko *
@@ -170,11 +200,15 @@
 						<input
 							id="name"
 							type="text"
-							bind:value={formData.name}
+							value={formData.name}
+							on:input={(e) => handleInput('name', e.currentTarget.value)}
 							maxlength="100"
 							required
 							class="w-full rounded-xl border border-input bg-background px-4 py-3 text-foreground transition focus:ring-2 focus:ring-primary/40 focus:outline-none"
 						/>
+						{#if errors.name}
+							<p class="mt-1 text-sm text-red-600">{errors.name}</p>
+						{/if}
 					</div>
 
 					<div class="grid gap-4 sm:grid-cols-2">
@@ -185,11 +219,15 @@
 							<input
 								id="email"
 								type="email"
-								bind:value={formData.email}
+								value={formData.email}
+								on:input={(e) => handleInput('email', e.currentTarget.value)}
 								maxlength="255"
 								required
 								class="w-full rounded-xl border border-input bg-background px-4 py-3 text-foreground transition focus:ring-2 focus:ring-primary/40 focus:outline-none"
 							/>
+							{#if errors.email}
+								<p class="mt-1 text-sm text-red-600">{errors.email}</p>
+							{/if}
 						</div>
 						<div>
 							<label for="phone" class="mb-1 block text-sm font-medium text-foreground">
@@ -198,7 +236,8 @@
 							<input
 								id="phone"
 								type="tel"
-								bind:value={formData.phone}
+								value={formData.phone}
+								on:input={(e) => handleInput('phone', e.currentTarget.value)}
 								maxlength="30"
 								class="w-full rounded-xl border border-input bg-background px-4 py-3 text-foreground transition focus:ring-2 focus:ring-primary/40 focus:outline-none"
 							/>
@@ -211,11 +250,15 @@
 						</label>
 						<textarea
 							id="message"
-							bind:value={formData.message}
+							value={formData.message}
+							on:input={(e) => handleInput('message', e.currentTarget.value)}
 							maxlength="1000"
 							required
 							class="min-h-30 w-full flex-1 resize-none rounded-xl border border-input bg-background px-4 py-3 text-foreground transition focus:ring-2 focus:ring-primary/40 focus:outline-none"
 						></textarea>
+						{#if errors.message}
+							<p class="mt-1 text-sm text-red-600">{errors.message}</p>
+						{/if}
 					</div>
 
 					<button
