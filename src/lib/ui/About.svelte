@@ -1,4 +1,5 @@
 <script lang="ts">
+	/* eslint-disable svelte/no-navigation-without-resolve */
 	import { fly } from 'svelte/transition';
 	import { Umbrella, Car, Coffee, Waves } from '@lucide/svelte';
 	import buildingImage from '$lib/assets/building.avif';
@@ -72,7 +73,7 @@
 			<!-- Left column: text + features -->
 			<div use:inview={() => (headerVisible = true)}>
 				{#if headerVisible}
-					<div transition:fly={{ x: -30, duration: 600 }}>
+					<div in:fly={{ x: -30, duration: 600 }}>
 						<span
 							class="mb-4 inline-block text-sm font-medium tracking-widest text-primary uppercase"
 						>
@@ -93,7 +94,7 @@
 							{#each features as feature, index (index)}
 								{#if featuresVisible}
 									<div
-										transition:fly={{ y: 20, duration: 500, delay: 200 + index * 100 }}
+										in:fly={{ y: 20, duration: 500, delay: 200 + index * 100 }}
 										class="group rounded-2xl bg-card p-5 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-medium"
 									>
 										<div
@@ -111,6 +112,16 @@
 								{/if}
 							{/each}
 						</div>
+
+						<div class="mt-8 flex justify-center">
+							<a
+								href="/informacje"
+								class="bg-gradient-sea inline-flex items-center justify-center rounded-full px-8 py-4 text-sm font-medium text-primary-foreground shadow-medium transition-all duration-300 hover:scale-105 hover:shadow-glow"
+							>
+								Dowiedz się więcej
+								<span class="ml-2">→</span>
+							</a>
+						</div>
 					</div>
 				{/if}
 			</div>
@@ -119,7 +130,7 @@
 			<div use:inview={() => (photoVisible = true)}>
 				{#if photoVisible}
 					<div
-						transition:fly={{ x: 30, duration: 700, delay: 200 }}
+						in:fly={{ x: 30, duration: 700, delay: 200 }}
 						class="overflow-hidden rounded-2xl shadow-medium"
 					>
 						<EnhancedImage
@@ -136,10 +147,7 @@
 		<div use:inview={() => (statsVisible = true)} class="grid grid-cols-2 gap-8 md:grid-cols-4">
 			{#each stats as stat, index (index)}
 				{#if statsVisible}
-					<div
-						transition:fly={{ y: 30, duration: 600, delay: 600 + index * 100 }}
-						class="text-center"
-					>
+					<div in:fly={{ y: 30, duration: 600, delay: 600 + index * 100 }} class="text-center">
 						<div class="mb-2 font-display text-4xl font-bold text-primary md:text-5xl">
 							{stat.value}
 						</div>

@@ -20,12 +20,12 @@
 			loading="eager"
 		/>
 		<div
-			class="absolute inset-0 bg-gradient-to-b from-foreground/40 via-foreground/20 to-background/95"
+			class="absolute inset-0 bg-linear-to-b from-foreground/40 via-foreground/20 to-background/95"
 		></div>
 	</div>
 
 	<div class="relative z-10 container mx-auto px-6 py-16 pt-24 text-center">
-		<div class="mx-auto max-w-4xl" transition:fade={{ duration: 800 }}>
+		<div class="mx-auto max-w-4xl" in:fade={{ duration: 800 }}>
 			<img
 				src={logo}
 				alt="Plaza Blisko - Pokoje Gościnne Kołobrzeg"
@@ -37,7 +37,7 @@
 
 			<div
 				class="flex flex-col items-center justify-center gap-4 sm:flex-row"
-				transition:fade={{ duration: 600, delay: 700 }}
+				in:fade={{ duration: 600, delay: 700 }}
 			>
 				<a
 					href="#rooms"
@@ -55,10 +55,10 @@
 		</div>
 	</div>
 
-	<div class="absolute bottom-6 left-1/2 -translate-x-1/2" transition:fade={{ delay: 1200 }}>
+	<div class="absolute bottom-6 left-1/2 -translate-x-1/2" in:fade={{ delay: 1200 }}>
 		<div
-			class="flex items-start justify-center rounded-full border-2 border-foreground/30 p-2"
-			style="width: 1.5rem; height: 2.5rem; animation: scroll-bounce 1.5s infinite;"
+			class="flex animate-bounce items-start justify-center rounded-full border-2 border-foreground/30 p-2"
+			style="width: 1.5rem; height: 2.5rem;"
 		>
 			<div class="h-3 w-1.5 rounded-full bg-primary"></div>
 		</div>

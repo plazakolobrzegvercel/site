@@ -1,12 +1,14 @@
-<script>
+<script lang="ts">
+	/* eslint-disable svelte/no-navigation-without-resolve */
 	import { onMount } from 'svelte';
-	import { slide, fade } from 'svelte/transition';
 	import { Menu, X } from '@lucide/svelte';
+	import logo from '$lib/assets/logo.avif';
+	import { fly } from 'svelte/transition';
 
 	const navLinks = [
 		{ href: '#home', label: 'Start' },
-		{ href: '#about', label: 'O nas' },
 		{ href: '#rooms', label: 'Pokoje' },
+		{ href: '#about', label: 'O nas' },
 		{ href: '#contact', label: 'Kontakt' },
 		{ href: '/informacje#regulamin', label: 'Regulamin', isRoute: true }
 	];
@@ -14,23 +16,41 @@
 	let isScrolled = false;
 	let isMobileMenuOpen = false;
 
+	const handleScroll = (hero: HTMLElement | null) => {
+		if (!hero) {
+			isScrolled = window.scrollY > 25;
+			return;
+		}
+
+		isScrolled = hero.getBoundingClientRect().bottom <= 0;
+	};
+
 	onMount(() => {
-		const handleScroll = () => {
-			isScrolled = window.scrollY > 50;
-		};
-		window.addEventListener('scroll', handleScroll);
-		return () => window.removeEventListener('scroll', handleScroll);
+		const hero = document.getElementById('home');
+
+		handleScroll(hero);
+		window.addEventListener('scroll', (e: Event) => handleScroll(hero), { passive: true });
+		return () => window.removeEventListener('scroll', (e: Event) => handleScroll(hero));
 	});
 </script>
 
 <header
-	class={`fixed top-0 right-0 left-0 z-50 transition-all duration-500 ${
-		isScrolled
-			? 'bg-primary/95 py-4 shadow-medium backdrop-blur-md md:py-3'
-			: 'bg-primary/90 py-6 backdrop-blur-sm md:py-6'
+	class={`fixed top-0 right-0 left-0 z-50 transition-all duration-200 ${
+		isScrolled ? 'bg-primary/95 shadow-medium backdrop-blur-md ' : 'bg-primary/90 backdrop-blur-sm'
 	}`}
 >
-	<nav class="relative container mx-auto flex items-center justify-center px-6">
+	<nav
+		class={`relative container mx-auto flex items-center justify-center bg-transparent px-6 transition-all duration-300 ${
+			isScrolled ? 'py-6 md:py-4' : 'py-7 md:py-6'
+		}`}
+	>
+		<a
+			href="#home"
+			class="absolute left-4 flex items-center gap-3 text-primary-foreground md:hidden"
+		>
+			<img src={logo} alt="Plaża Blisko" class="h-8 w-auto object-contain" />
+		</a>
+
 		<ul class="hidden items-center gap-8 md:flex">
 			{#each navLinks as link, index (index)}
 				<li>
@@ -81,8 +101,8 @@
 	</nav>
 
 	{#if isMobileMenuOpen}
-		<div class="bg-primary/98 backdrop-blur-lg md:hidden">
-			<ul class="container mx-auto flex flex-col gap-2 px-6 py-6">
+		<div class={`bg-transparent md:hidden ${isScrolled ? ' py-7  md:py-3' : ' py-8  md:py-6'}`}>
+			<ul class="container mx-auto flex flex-col gap-2 bg-transparent px-6 py-2">
 				{#each navLinks as link, index (index)}
 					<li>
 						{#if link.isRoute}

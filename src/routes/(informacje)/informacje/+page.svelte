@@ -1,4 +1,5 @@
 <script>
+	/* eslint-disable svelte/no-navigation-without-resolve */
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { fade } from 'svelte/transition';
@@ -75,7 +76,7 @@
 						Start
 						<span
 							class="absolute -bottom-1 left-0 h-0.5 w-0 bg-primary-foreground transition-all duration-300 group-hover:w-full"
-						/>
+						></span>
 					</a>
 				</li>
 				<li>
@@ -86,7 +87,7 @@
 						O nas
 						<span
 							class="absolute -bottom-1 left-0 h-0.5 w-0 bg-primary-foreground transition-all duration-300 group-hover:w-full"
-						/>
+						></span>
 					</a>
 				</li>
 				<li>
@@ -97,7 +98,7 @@
 						Pokoje
 						<span
 							class="absolute -bottom-1 left-0 h-0.5 w-0 bg-primary-foreground transition-all duration-300 group-hover:w-full"
-						/>
+						></span>
 					</a>
 				</li>
 				<li>
@@ -108,7 +109,7 @@
 						Kontakt
 						<span
 							class="absolute -bottom-1 left-0 h-0.5 w-0 bg-primary-foreground transition-all duration-300 group-hover:w-full"
-						/>
+						></span>
 					</a>
 				</li>
 				<li>
@@ -119,7 +120,7 @@
 						Regulamin
 						<span
 							class="absolute -bottom-1 left-0 h-0.5 w-0 bg-primary-foreground transition-all duration-300 group-hover:w-full"
-						/>
+						></span>
 					</a>
 				</li>
 				<li>
@@ -141,9 +142,9 @@
 		</div>
 	</header>
 	<section class="bg-gradient-sea relative overflow-hidden py-20">
-		<div class="absolute inset-0 bg-primary/20" />
+		<div class="absolute inset-0 bg-primary/20"></div>
 		<div class="relative z-10 container mx-auto px-6">
-			<div class="mx-auto max-w-3xl text-center" transition:fade={{ duration: 600 }}>
+			<div class="mx-auto max-w-3xl text-center" in:fade={{ duration: 600 }}>
 				<span
 					class="mb-4 inline-block text-sm font-medium tracking-widest text-primary-foreground/80 uppercase"
 				>
@@ -164,7 +165,7 @@
 	<section class="bg-card py-20">
 		<div class="container mx-auto px-6">
 			<div class="grid items-center gap-12 lg:grid-cols-2">
-				<div transition:fade={{ duration: 600 }}>
+				<div in:fade={{ duration: 600 }}>
 					<span
 						class="mb-4 inline-block text-sm font-medium tracking-widest text-primary uppercase"
 					>
@@ -196,7 +197,7 @@
 					</div>
 				</div>
 
-				<div class="relative" transition:fade={{ duration: 600, delay: 200 }}>
+				<div class="relative" in:fade={{ duration: 600, delay: 200 }}>
 					<div class="overflow-hidden rounded-2xl shadow-medium">
 						<EnhancedImage
 							src={buildingImg}
@@ -220,7 +221,7 @@
 	<section class="bg-background py-16">
 		<div class="container mx-auto px-6">
 			<div class="grid items-center gap-12 lg:grid-cols-2">
-				<div transition:fade={{ duration: 600 }}>
+				<div in:fade={{ duration: 600 }}>
 					<div class="mb-6 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2">
 						<FileText class="h-5 w-5 text-primary" />
 						<span class="text-sm font-medium text-primary">Dokument urzędowy</span>
@@ -236,7 +237,7 @@
 
 				<div
 					class="overflow-hidden rounded-2xl shadow-medium"
-					transition:fade={{ duration: 600, delay: 200 }}
+					in:fade={{ duration: 600, delay: 200 }}
 				>
 					<EnhancedImage
 						src="https://plazablisko.pl/wp-content/uploads/2020/08/zaswiadczenie-img.jpg"
@@ -248,9 +249,9 @@
 		</div>
 	</section>
 
-	<section id="regulamin" class="scroll-mt-24 bg-card py-20">
+	<section id="regulamin" class="scroll-mt-10 bg-card py-20">
 		<div class="container mx-auto px-6">
-			<div class="mx-auto mb-12 max-w-3xl text-center" transition:fade={{ duration: 600 }}>
+			<div class="mx-auto mb-12 max-w-3xl text-center" in:fade={{ duration: 600 }}>
 				<div class="mb-6 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2">
 					<ScrollText class="h-5 w-5 text-primary" />
 					<span class="text-sm font-medium text-primary">Regulamin</span>
@@ -269,7 +270,7 @@
 					{#each regulations as item, index (index)}
 						<div
 							class="flex gap-4 rounded-xl border border-border bg-background p-4 transition-colors hover:border-primary/30"
-							transition:fade={{ duration: 400, delay: index * 30 }}
+							in:fade={{ duration: 400, delay: index * 30 }}
 						>
 							<span
 								class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 font-display text-sm font-semibold text-primary"
@@ -289,13 +290,13 @@
 	<section class="bg-gradient-sea relative overflow-hidden py-20">
 		<div class="absolute inset-0 bg-primary/10"></div>
 		<div class="relative z-10 container mx-auto px-6">
-			<div class="mx-auto max-w-2xl text-center" transition:fade={{ duration: 600 }}>
+			<div class="mx-auto max-w-2xl text-center" in:fade={{ duration: 600 }}>
 				<h2 class="mb-6 font-display text-3xl font-semibold text-primary-foreground md:text-4xl">
 					Zapraszamy do siebie!
 				</h2>
 				<p class="mb-10 font-body text-lg leading-relaxed text-primary-foreground/80">
 					Morze, cisza i komfort czekają na wyciągnięcie ręki. Sprawdź dostępność naszych pokoi i
-					zarezerwuj swój kawałek wakacji w Kołobrzegu. Chętnie odpowiemy na wszystkie pytania –
+					zarezerwuj swój kawałek wakacji w Kołobrzegu. Chętnie odpowiemy na wszystkie pytania -
 					zadzwoń lub napisz.
 				</p>
 

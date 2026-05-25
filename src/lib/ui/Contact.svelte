@@ -1,4 +1,5 @@
 <script lang="ts">
+	/* eslint-disable svelte/no-navigation-without-resolve */
 	import { fade, fly } from 'svelte/transition';
 	import { MapPin, Phone, Mail, Clock, Send } from '@lucide/svelte';
 	import { z } from 'zod';
@@ -83,8 +84,8 @@
 <svelte:window on:scroll={checkInView} />
 
 <section id="contact" class="bg-gradient-sand relative overflow-hidden py-24">
-	<div class="absolute top-0 right-0 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
-	<div class="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-sunset/5 blur-3xl" />
+	<div class="absolute top-0 right-0 h-96 w-96 rounded-full bg-primary/5 blur-3xl"></div>
+	<div class="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-sunset/5 blur-3xl"></div>
 
 	<div class="relative z-10 container mx-auto px-6" bind:this={contactSection}>
 		<div class="mx-auto mb-16 max-w-3xl text-center" transition:fade={{ duration: 600 }}>
@@ -213,8 +214,8 @@
 							bind:value={formData.message}
 							maxlength="1000"
 							required
-							class="min-h-[120px] w-full flex-1 resize-none rounded-xl border border-input bg-background px-4 py-3 text-foreground transition focus:ring-2 focus:ring-primary/40 focus:outline-none"
-						/>
+							class="min-h-30 w-full flex-1 resize-none rounded-xl border border-input bg-background px-4 py-3 text-foreground transition focus:ring-2 focus:ring-primary/40 focus:outline-none"
+						></textarea>
 					</div>
 
 					<button
@@ -234,14 +235,14 @@
 			transition:fade={{ duration: 600, delay: 500 }}
 		>
 			<iframe
-				src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2355.0123456789!2d15.576789!3d54.177654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47002f8b6a7c5f89%3A0x1234567890abcdef!2sul.%20Kopernika%207%2F1%2C%2078-100%20Ko%C5%82obrzeg!5e0!3m2!1spl!2spl!4v1234567890123"
-				title="Lokalizacja Plaza Blisko"
+				src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2334.7616755682047!2d15.578212!3d54.1842965!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4700159b344bcf89%3A0x86a8c03659866bcf!2splazablisko.pl!5e0!3m2!1spl!2spl!4v1779701596098!5m2!1spl!2spl"
 				width="100%"
+				title="Lokalizacja Plaza Blisko"
 				height="100%"
-				style="border: 0"
+				style="border:0;"
 				loading="lazy"
 				referrerpolicy="no-referrer-when-downgrade"
-			/>
+			></iframe>
 		</div>
 	</div>
 </section>

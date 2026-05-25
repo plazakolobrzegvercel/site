@@ -310,6 +310,20 @@
 							</div>
 						</button>
 						<div class="p-6">
+							<div class="mb-4">
+								<h3 class="mb-3 font-display text-2xl font-semibold text-foreground">
+									{room.name}
+								</h3>
+								<div
+									class="mb-4 inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-semibold tracking-[0.2em] text-primary uppercase"
+								>
+									{room.subtitle}
+								</div>
+								<p class="text-base leading-relaxed text-muted-foreground">
+									{room.shortDescription}
+								</p>
+							</div>
+
 							<div class="mb-4 flex flex-wrap gap-2">
 								{#each room.keyFeatures as feature, i (i)}
 									<div class="flex items-center gap-2 rounded-full bg-muted px-3 py-1.5 text-sm">
@@ -346,7 +360,7 @@
 								<button
 									type="button"
 									onclick={() => openDetail(room)}
-									class="flex items-center gap-2 rounded-full bg-muted px-5 py-3 font-medium text-foreground transition-all duration-300 hover:bg-muted/70"
+									class="flex cursor-pointer items-center gap-2 rounded-full bg-muted px-5 py-3 font-medium text-foreground transition-all duration-300 hover:bg-muted/70"
 								>
 									<Info class="h-4 w-4" />
 									Więcej
@@ -445,7 +459,7 @@
 								openGallery(room);
 							}
 						}}
-						class="rounded-full bg-muted px-6 py-3 font-medium text-foreground transition-all duration-300 hover:bg-muted/80"
+						class="cursor-pointer rounded-full bg-muted px-6 py-3 font-medium text-foreground transition-all duration-300 hover:bg-muted/80"
 					>
 						Galeria
 					</button>
