@@ -1,4 +1,5 @@
 <script lang="ts">
+	/* eslint-disable svelte/no-navigation-without-resolve */
 	import { fly } from 'svelte/transition';
 	import { Waves, Heart } from '@lucide/svelte';
 	import logo from '$lib/assets/logo.avif';
@@ -9,7 +10,8 @@
 		{ href: '#home', label: 'Start' },
 		{ href: '#about', label: 'O nas' },
 		{ href: '#rooms', label: 'Pokoje' },
-		{ href: '#contact', label: 'Kontakt' }
+		{ href: '#contact', label: 'Kontakt' },
+		{ href: '/informacje/#rodo', label: 'RODO' }
 	];
 
 	let visible = false;
@@ -62,7 +64,6 @@
 				<nav transition:fly={{ y: 20, duration: 500, delay: 100 }} class="flex gap-8">
 					{#each navLinks as link, i (i)}
 						<a
-							// eslint-disable-next-line svelte/no-navigation-without-resolve
 							href={link.href}
 							class="font-body text-sm text-primary-foreground/70 transition-colors hover:text-primary-foreground"
 						>

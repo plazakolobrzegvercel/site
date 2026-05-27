@@ -196,6 +196,8 @@
 						<EnhancedImage
 							src={buildingImg}
 							alt="Domek Plaza Blisko w Kołobrzegu"
+							width={1200}
+							height={900}
 							className="h-auto w-full object-cover"
 						/>
 					</div>
@@ -236,6 +238,8 @@
 					<EnhancedImage
 						src="https://plazablisko.pl/wp-content/uploads/2020/08/zaswiadczenie-img.jpg"
 						alt="Zaświadczenie o wpisie do ewidencji obiektów hotelarskich"
+						width={1200}
+						height={800}
 						className="h-auto w-full"
 					/>
 				</div>
@@ -276,6 +280,114 @@
 							</p>
 						</div>
 					{/each}
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="rodo" class="bg-background py-20">
+		<div class="container mx-auto px-6">
+			<div class="mx-auto mb-12 max-w-3xl text-center" in:fade={{ duration: 600 }}>
+				<div class="mb-6 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2">
+					<ScrollText class="h-5 w-5 text-primary" />
+					<span class="text-sm font-medium text-primary">Polityka prywatności</span>
+				</div>
+				<h2 class="mb-4 font-display text-3xl font-semibold text-foreground md:text-4xl">
+					Polityka prywatności
+				</h2>
+				<p class="font-body leading-relaxed text-muted-foreground">
+					RODO działa, więc z poczucia obowiązku informacyjnego opiszę co się dzieje z Twoimi
+					danymi, gdy zarezerwujesz pokój na plazablisko.pl.
+				</p>
+			</div>
+
+			<div class="space-y-6 font-body leading-relaxed text-muted-foreground">
+				<p>
+					W celu rezerwacji proszę w mailu bądź smsem podać imię i nazwisko oraz ilość osób i okres
+					na jaki chcesz zarezerwować pokój.
+				</p>
+				<p>
+					W odpowiedzi prześlę do Ciebie wiadomość e-mail lub sms z moimi danymi, ofertą cenową oraz
+					danymi do wpłaty zadatku w celu potwierdzenia rezerwacji.
+				</p>
+				<p>
+					Twoje dane nie będą przekazywane osobom trzecim, zostaną wykorzystane jedynie w celu
+					dokonania rezerwacji. Gdy przyjedziesz na miejsce, resztę należności za pobyt uregulujesz
+					gotówką – wystawiam paragon fiskalny. Opłata uzdrowiskowa również zostanie pobrana na
+					miejscu, po podaniu danych osobowych: imię, nazwisko, adres. Posiadam upoważnienie Urzędu
+					Miejskiego w Kołobrzegu do przetwarzania Twoich danych w celu poboru opłaty uzdrowiskowej.
+					Dane te nie będą wykorzystywane w żadnym innym celu.
+				</p>
+				<p>
+					Dane pozyskane w celu rezerwacji pokoju, tj. imię, nazwisko, nr telefonu, będą
+					przechowywane w pliku zabezpieczonym hasłem, numery telefonów przechowywane są w pamięci
+					urządzenia typu smartfon. Jeśli będziesz chciał skontaktować się telefonicznie i
+					zarezerwować pobyt ponownie – będę wiedział od razu, że dzwoni mój klient. Numery
+					telefonów nie będą przekazywane osobom trzecim.
+				</p>
+				<p>
+					Masz prawo do zmiany swoich danych, ich usunięcia lub do bycia zapomnianym. Wystarczy, że
+					dasz mi o tym znać e-mailem na adres admin@plazablisko.pl. Po otrzymaniu wiadomości,
+					dyspozycja jest realizowana, a Ty zostaniesz o tym poinformowany mailem.
+				</p>
+				<p>
+					Administratorem danych jestem ja: Łukasz Sobis, tel. 502 258 401, e-mail
+					admin@plazablisko.pl
+				</p>
+				<p>
+					Dokonując rezerwacji, telefonując, pisząc maila do mnie – automatycznie wyrażasz zgodę na
+					udostępnienie swoich danych na powyższych zasadach.
+				</p>
+				<p>
+					W przypadku wykrycia naruszenia danych osobowych zostaniesz o tym poinformowany, zostanie
+					sporządzony raport naruszenia danych, poinformowany zostanie Prezes UODO, zostaną podjęte
+					działania w celu zapobieżenia przyszłym naruszeniom.
+				</p>
+				<div>
+					<p class="font-semibold text-foreground">Informacje o ciasteczkach</p>
+					<p>Wszystkie ciasteczka zjadam i popijam kawusią.</p>
+					<p>A te ciasteczka internetowe czyli tzw. cookies – sprawa z nimi wygląda tak:</p>
+					<ol class="ml-6 list-decimal space-y-2 text-muted-foreground">
+						<li>
+							Moja strona plazablisko.pl nie zbiera automatycznie żadnych informacji oprócz plików
+							cookies i informacji w nich zawartych.
+						</li>
+						<li>
+							Ciasteczka czyli tzw. cookies to dane informatyczne, zwłaszcza pliki tekstowe, które
+							są przechowywane na Twoim urządzeniu i służą do korzystania ze strony internetowej
+							plazablisko.pl. Takie pliki zawierają najczęściej nazwę strony, ich czas
+							przechowywania na Twoim urządzeniu i charakterystyczny numer.
+						</li>
+						<li>
+							Pliki cookies na Twoim urządzeniu zamieszczam ja: Łukasz Sobis, ul. Kopernika 7/1,
+							78-100 Kołobrzeg.
+						</li>
+						<li>
+							Ciasteczka są wykorzystywane aby:
+							<ul class="ml-6 list-disc space-y-1">
+								<li>
+									lepiej się oglądało moją stronę plazablisko.pl – przeglądarka na Twoim urządzeniu
+									zapamiętuje te ustawienia;
+								</li>
+								<li>generować anonimowe statystyki w celu ulepszenia działania mojej strony.</li>
+							</ul>
+						</li>
+						<li>
+							Generalnie stosowane są dwa rodzaje plików cookies: stałe i tymczasowe. Tymczasowe
+							zapamiętują ustawienia do chwili zamknięcia przeglądarki, a stałe zapisują te
+							ustawienia na dłużej, zależnie od preferencji przeglądarki na Twoim urządzeniu, albo
+							do czasu aż sam je ręcznie usuniesz.
+						</li>
+						<li>
+							W większości przypadków przeglądarki internetowe mają domyślne ustawienia dotyczące
+							zapamiętywania plików cookies. Możesz je zmienić samodzielnie na swoim urządzeniu.
+							Więcej szczegółów znajdziesz w ustawieniach lub pliku pomocy swojej przeglądarki.
+						</li>
+						<li>
+							Więcej informacji na temat plików cookies możesz znaleźć w internetach lub w pliku
+							pomocy swojej przeglądarki.
+						</li>
+					</ol>
 				</div>
 			</div>
 		</div>
@@ -329,9 +441,17 @@
 					<Waves class="h-4 w-4" />
 					© {currentYear} Plaza Blisko. Wszelkie prawa zastrzeżone.
 				</p>
-				<p class="flex items-center gap-1 font-body text-xs text-primary-foreground/60">
-					Stworzone z <Heart class="h-3 w-3 text-sunset" /> w Kołobrzegu
-				</p>
+				<div class="flex flex-col items-center gap-2 text-center md:items-end md:text-right">
+					<a
+						href="/informacje/#rodo"
+						class="font-body text-xs text-primary-foreground/70 transition-colors hover:text-primary-foreground"
+					>
+						RODO
+					</a>
+					<p class="flex items-center gap-1 font-body text-xs text-primary-foreground/60">
+						Stworzone z <Heart class="h-3 w-3 text-sunset" /> w Kołobrzegu
+					</p>
+				</div>
 			</div>
 		</div>
 	</footer>
